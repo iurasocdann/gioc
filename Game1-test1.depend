@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1477080780 source:d:\programe c++\game1-test1\main.cpp
+	<iostream>
+	<conio.h>
+	<string.h>
+	<windows.h>
+	<stdlib.h>
+
