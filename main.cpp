@@ -15,31 +15,26 @@ struct player {
   int y;
 }p;
 
-char a[100][100]={ "####################"
+char a[100][100]={ "#########0##########"
+                  ,"#                  #"
+                  ,"#                  #"
+                  ,"#                  #"
+                  ,"#                  #"
+                  ,"#                  #"
+                  ,"0                  #"
+                  ,"#                  #"
+                  ,"#                  0"
                   ,"#                  #"
                   ,"#                  #"
                   ,"#                  #"
                   ,"#                  #"
                   ,"#                  #"
                   ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"#                  #"
-                  ,"####################"};
+                  ,"################0###"};
 char player = '@';
 
-bool findp()
-{
-   for(int i=0;i<20;i++)
+bool findp(){
+   for(int i=0;i<16;i++)
       for(int j=0;j<20;j++){
          if (a[i][j]=='@'){
             p.x = i;
@@ -49,35 +44,39 @@ bool findp()
       }
       return 0;
 }
-bool validare(int i)
-{
+
+int validare(int i){
    switch (i){
    case 1:
       if(a[p.x-1][p.y]=='#'){
-            return 0;
-        }
+         return 0;
+      }
+      else if (a[p.x-1][p.y]=='0') return 2;
       break;
    case 2:
-       if(a[p.x+1][p.y]=='#'){
-          return 0;
-       }
-       break;
+   if(a[p.x+1][p.y]=='#'){
+      return 0;
+   }
+   else if (a[p.x+1][p.y]=='0') return 2;
+   break;
    case 3:
-       if(a[p.x][p.y-1]=='#'){
-          return 0;
-       }
-       break;
+   if(a[p.x][p.y-1]=='#'){
+      return 0;
+   }
+   else if (a[p.x][p.y-1]=='0') return 2;
+   break;
    case 4:
-       if(a[p.x][p.y+1]=='#'){
-          return 0;
-       }
-       break;
+   if(a[p.x][p.y+1]=='#'){
+      return 0;
+   }
+   else if (a[p.x][p.y+1]=='0') return 2;
+   break;
    }
    return 1;
 }
 void afisare()
 {
-   for(int i=0;i<20;i++)
+   for(int i=0;i<16;i++)
       {for(int j=0;j<20;j++)
          cout<<a[i][j];
     cout<<endl;}
@@ -92,7 +91,7 @@ void start()
 void up()
 {
    if(findp()){
-      if(validare(1)){
+      if(validare(1)==1){
       char aux;
       system("cls");
       aux = a[p.x-1][p.y];
@@ -100,17 +99,19 @@ void up()
       a[p.x][p.y] = aux;
       afisare();
    }
+   else if (validare(1)==2) {cout<<"Garda crede ca ne-a luat banii de cuie"; exit(1) ;
+   }
    else {cout<<"lul";}
    }
    else {
-      cout<"lol";
+      cout<<"fuck";
       exit(0);
    }
 }
 void dw()
 {
    if(findp()){
-      if(validare(2)){
+      if(validare(2)==1){
       char aux;
       system("cls");
       aux = a[p.x+1][p.y];
@@ -118,17 +119,19 @@ void dw()
       a[p.x][p.y] = aux;
       afisare();
    }
+   else if (validare(2)==2) {cout<<"Garda crede ca poate intra cu Loganul pe geam"; exit(1) ;
+   }
    else {cout<<"lul";}
    }
    else {
-      cout<<"Lol";
+      cout<<"fuck";
       exit(0);
    }
 }
 void left()
 {
    if(findp()){
-      if(validare(3)){
+      if(validare(3)==1){
       char aux;
       system("cls");
       aux = a[p.x][p.y-1];
@@ -136,40 +139,45 @@ void left()
       a[p.x][p.y] = aux;
       afisare();
    }
+   else if (validare(3)==2) {cout<<"Garda crede ca ne-a furat strada"; exit(1) ;
+   }
    else {cout<<"lul";}
    }
    else {
-      cout<<"lol";
+      cout<<"fuck";
       exit(0);
    }
 }
 void right()
 {
-    if(findp()){
-        if(validare(4))
-        {
-            char aux;
-            system("cls");
-            aux = a[p.x][p.y+1];
-            a[p.x][p.y+1] = a[p.x][p.y];
-            a[p.x][p.y] = aux;
-            afisare();
-        }
-        else {cout<<"lul";}
+   if(findp()){
+      if(validare(4)==1){
+      char aux;
+      system("cls");
+      aux = a[p.x][p.y+1];
+      a[p.x][p.y+1] = a[p.x][p.y];
+      a[p.x][p.y] = aux;
+      afisare();
+   }
+   else if (validare(4)==2) {cout<<"Garda crede ca maria e o fata"; exit(1) ;
+   }
+   else {cout<<"lul";}
    }
    else {
-      cout<<"lol";
+      cout<<"fuck";
       exit(0);
    }
 }
 
 int main()
 {
-    start();
+   start();
+    int c = 0;
     while(1)
     {
-        char c = 0;
-        switch(c=getch()){
+        c = 0;
+
+        switch((c=getch())) {
         case KEY_UP:
             up();
             break;
@@ -185,6 +193,7 @@ int main()
         default:
             break;
         }
+
     }
     return 0;
 }
